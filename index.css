@@ -1,5 +1,5 @@
 body {
-  padding: 5%;
+  padding: 1% 5% 0 5%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -14,12 +14,12 @@ table {
 #createEntryBtn {
   position: absolute;
   right: 5%;
-  top: 62vh;
+  top: 56vh;
 }
 
 #main-table-data-form {
   overflow: auto;
-  height: 50vh;
+  height: 52vh;
 }
 
 table {
@@ -35,13 +35,33 @@ table {
 
 td {
   padding: 0px 3px 0px 3px;
+  background-color: linen;
+  border-radius: 0;
+  text-align: center;
+}
+
+td:first-child {
+  padding-left: 45px;
+}
+
+th {
+  background-color: grey;
+  border-radius: 0;
+  color: linen;
+}
+
+tr {
+  position: relative;
 }
 
 input {
   border: 1px solid darkturquoise !important;
+  background-color: white !important;
 }
 
 input:disabled {
+  display: inline;
+  background-color: inherit !important;
   border: none !important;
   color: black !important;
 }
@@ -58,4 +78,12 @@ select:disabled {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
+}
+
+.categories-icons {
+  width: 40px;
+  position: absolute;
+  left: 2px;
+  top: 5px;
+  background-color: inherit !important;
 }

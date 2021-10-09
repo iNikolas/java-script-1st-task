@@ -8,6 +8,9 @@ const deleteIcon = "./pictures/deleteIcon.png";
 const editIcon = "./pictures/editIcon.png";
 const archiveIcon = "./pictures/archiveIcon.png";
 const mainTableIcon = "./pictures/mainTableIcon.png";
+const ideaIcon = "./pictures/idea.png";
+const taskIcon = "./pictures/task.png";
+const thoughtIcon = "./pictures/thought.png";
 
 const CATEGORIES = ["Task", "Random Thought", "Idea"];
 const EDITABLE_FIELDS = ["name", "category", "content"];
@@ -42,7 +45,7 @@ let tableValues = [
     created: "Oct 20, 2021",
     category: "Task",
     content: "Cream, apples, potato, beer.",
-    dates: "10.10.2021",
+    dates: "",
   },
   {
     name: "New feature",
@@ -70,6 +73,37 @@ let tableValues = [
 
 let archivedValues = [];
 let statisticValues = {};
+
+function appendIcons(action = "for main table") {
+  [...mainTable.rows].forEach((tr, index) => {
+    const img = document.createElement("img");
+    img.className = "categories-icons";
+    if (action === "for main table") {
+      if (tableValues[index]?.category === "Task") img.src = taskIcon;
+      if (tableValues[index]?.category === "Random Thought")
+        img.src = thoughtIcon;
+      if (tableValues[index]?.category === "Idea") img.src = ideaIcon;
+    } else if (action === "for archive table") {
+      if (archivedValues[index]?.category === "Task") img.src = taskIcon;
+      if (archivedValues[index]?.category === "Random Thought")
+        img.src = thoughtIcon;
+      if (archivedValues[index]?.category === "Idea") img.src = ideaIcon;
+    }
+    tr.append(img);
+  });
+}
+
+function appendStatisticIcons() {
+  [...archiveTable.rows].forEach((tr, index) => {
+    const img = document.createElement("img");
+    img.className = "categories-icons";
+    const category = tr.querySelector("input").value;
+    if (category === "Task") img.src = taskIcon;
+    if (category === "Random Thought") img.src = thoughtIcon;
+    if (category === "Idea") img.src = ideaIcon;
+    tr.append(img);
+  });
+}
 
 function calculateStatistic(e) {
   //  "This try/catch structure is unnecessary here, I had used the try/catch structure according to the task
@@ -120,6 +154,7 @@ function appendStatisticEntries(statisticValues) {
     }
     archiveTable.append(newTableRow);
   }
+  appendStatisticIcons()
 }
 
 appendButtons(headerControlButtons, "thead");
@@ -174,6 +209,11 @@ function appendEntries(targetValues, action = "for main table") {
     newTableRow.append(actionsTd);
     mainTable.append(newTableRow);
   });
+  if (action === "for main table") {
+    appendIcons();
+  } else if (action === "for archive table") {
+    appendIcons("for archive table");
+  }
 }
 
 function createSelectElem(parentNode, cell, index, tableEntry) {
@@ -335,7 +375,7 @@ function handleTableChangeData(rowId) {
 }
 
 function extractDateInfo(fieldText) {
-  const result = fieldText.match(/\d{1,2}[.,/\\]\d{1,2}[.,/\\]\d{2,4}/g);
+  const result = fieldText?.match(/\d{1,2}[.,/\\]\d{1,2}[.,/\\]\d{2,4}/g);
   return result
     ? result.reduce((accumulator, value, index, array) => {
         const prefix = index === array.length - 1 ? "." : ", ";
