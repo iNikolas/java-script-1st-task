@@ -15,11 +15,32 @@ let view = "main";
 
 let tableValues = [
   {
-    name: "Shopping List",
-    created: "Apr 20, 2021",
+    name: "Learn Java Script",
+    created: "Apr 20, 2020",
+    category: "Idea",
+    content: "If I learn JavaScript I will discover more opportunities in my life.",
+    dates: "",
+  },
+  {
+    name: "Shroud thoughts",
+    created: "May 08, 2021",
+    category: "Random Thought",
+    content: "Banana is big but the peel is much bigger",
+    dates: "",
+  },
+  {
+    name: "My elaborate plan of learning JavaScript",
+    created: "Jan 15, 2021",
     category: "Task",
-    content: "tomatoes, bread",
-    dates: "15.12.2012",
+    content: "If I finally start learning JS today 15.01.2021, until my next birthday on 25.03.1989 I will be a great programmer",
+    dates: "15.01.2021, 25.03.1989.",
+  },
+  {
+    name: "Shopping List",
+    created: "Oct 20, 2021",
+    category: "Task",
+    content: "Cream, apples, potato, beer.",
+    dates: "10.10.2021",
   },
   {
     name: "New feature",
@@ -32,7 +53,14 @@ let tableValues = [
     name: "Old feature",
     created: "Feb 25, 2021",
     category: "Random Thought",
-    content: "Old feature 18.12.2021 better new twos 17.11.1019",
+    content: "Old feature better new twos.",
+    dates: "",
+  },
+  {
+    name: "I know a little about this life",
+    created: "Oct 31, 2021",
+    category: "Random Thought",
+    content: "If life were predictable it would cease to be life, and be without flavor. ",
     dates: "",
   },
 ];
