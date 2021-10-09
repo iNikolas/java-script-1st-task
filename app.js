@@ -18,7 +18,8 @@ let tableValues = [
     name: "Learn Java Script",
     created: "Apr 20, 2020",
     category: "Idea",
-    content: "If I learn JavaScript I will discover more opportunities in my life.",
+    content:
+      "If I learn JavaScript I will discover more opportunities in my life.",
     dates: "",
   },
   {
@@ -32,7 +33,8 @@ let tableValues = [
     name: "My elaborate plan of learning JavaScript",
     created: "Jan 15, 2021",
     category: "Task",
-    content: "If I finally start learning JS today 15.01.2021, until my next birthday on 25.03.1989 I will be a great programmer",
+    content:
+      "If I finally start learning JS today 15.01.2021, until my next birthday on 25.03.1989 I will be a great programmer",
     dates: "15.01.2021, 25.03.1989.",
   },
   {
@@ -60,7 +62,8 @@ let tableValues = [
     name: "I know a little about this life",
     created: "Oct 31, 2021",
     category: "Random Thought",
-    content: "If life were predictable it would cease to be life, and be without flavor. ",
+    content:
+      "If life were predictable it would cease to be life, and be without flavor. ",
     dates: "",
   },
 ];
@@ -130,6 +133,7 @@ createEntryBtn.addEventListener("click", () => {
 });
 headerControlButtons.addEventListener("click", handleHeaderBtnClick);
 mainTableDataForm.addEventListener("click", calculateStatistic);
+createEntryBtn.dataset.action = "edit";
 
 function createNewEntry() {
   const entryData = {};
