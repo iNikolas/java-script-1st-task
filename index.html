@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Notes App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+      <form onsubmit="return false" id="main-table-data-form">
+        <table id="main-table" class="responsive-table highlight">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Created</th>
+              <th>Category</th>
+              <th>Content</th>
+              <th>Dates</th>
+              <th id="header-control-buttons"></th>
+            </tr>
+          </thead>
+          <tbody id="table-body-main"></tbody>
+        </table>
+        <a id="createEntryBtn" class="waves-effect waves-light btn-small"
+          >Create Note</a
+        >
+      </form>
+    <div>
+      <table class="responsive-table highlight">
+        <thead>
+          <tr>
+            <th>Name Category</th>
+            <th>Active</th>
+            <th>Archived</th>
+          </tr>
+        </thead>
+        <tbody id="table-body-archive"></tbody>
+      </table>
+    </div>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
