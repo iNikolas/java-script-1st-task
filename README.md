@@ -56,5 +56,4 @@ requirements while working on the task:
 https://git-scm.com/docs
 https://guides.github.com/introduction/flow/
 
-The task should take 1-3 days. If you have any questions, do not hesitate to ask them in the
-Slack channel #js_task_1
+The task should take 1-3 days.

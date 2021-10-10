@@ -18,7 +18,7 @@ let view = "main";
 
 let tableValues = [
   {
-    name: "Learn Java Script",
+    name: "Learn Java Script.",
     created: "Apr 20, 2020",
     category: "Idea",
     content:
@@ -83,6 +83,7 @@ createEntryBtn.addEventListener("click", () => {
   appendEntries(tableValues);
   switchToMainView();
 });
+
 headerControlButtons.addEventListener("click", handleHeaderBtnClick);
 mainTableDataForm.addEventListener("click", calculateStatistic);
 mainTableDataForm.addEventListener("keypress", handleFormKeyPress);
@@ -91,6 +92,7 @@ createEntryBtn.dataset.action = "edit";
 function handleFormKeyPress(e) {
   if (e.key === "Enter") {
     toggleEditMode(e.target.closest("tr"));
+    calculateStatistic();
   }
 }
 
@@ -114,7 +116,7 @@ function appendIcons(action = "for main table") {
 }
 
 function appendStatisticIcons() {
-  [...archiveTable.rows].forEach((tr, index) => {
+  [...archiveTable.rows].forEach((tr) => {
     const img = document.createElement("img");
     img.className = "categories-icons";
     const category = tr.querySelector("input").value;
