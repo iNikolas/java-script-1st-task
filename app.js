@@ -74,6 +74,26 @@ let tableValues = [
 let archivedValues = [];
 let statisticValues = {};
 
+appendButtons(headerControlButtons, "thead");
+appendEntries(tableValues);
+calculateStatistic();
+
+createEntryBtn.addEventListener("click", () => {
+  createNewEntry();
+  appendEntries(tableValues);
+  switchToMainView();
+});
+headerControlButtons.addEventListener("click", handleHeaderBtnClick);
+mainTableDataForm.addEventListener("click", calculateStatistic);
+mainTableDataForm.addEventListener("keypress", handleFormKeyPress);
+createEntryBtn.dataset.action = "edit";
+
+function handleFormKeyPress(e) {
+  if (e.key === "Enter") {
+    toggleEditMode(e.target.closest("tr"));
+  }
+}
+
 function appendIcons(action = "for main table") {
   [...mainTable.rows].forEach((tr, index) => {
     const img = document.createElement("img");
@@ -154,21 +174,8 @@ function appendStatisticEntries(statisticValues) {
     }
     archiveTable.append(newTableRow);
   }
-  appendStatisticIcons()
+  appendStatisticIcons();
 }
-
-appendButtons(headerControlButtons, "thead");
-appendEntries(tableValues);
-calculateStatistic();
-
-createEntryBtn.addEventListener("click", () => {
-  createNewEntry();
-  appendEntries(tableValues);
-  switchToMainView();
-});
-headerControlButtons.addEventListener("click", handleHeaderBtnClick);
-mainTableDataForm.addEventListener("click", calculateStatistic);
-createEntryBtn.dataset.action = "edit";
 
 function createNewEntry() {
   const entryData = {};
