@@ -1,5 +1,7 @@
 # Hometask #1 | JavaScript
 
+[Working example](https://inikolas.github.io/radency-java-script-1st-task/)
+
 1. Your task is to create a notes app in JS as a web app. Users can add, edit and remove
 notes.
 2. List of notes is displayed in a form of table (HTML representation may vary: table, divs
@@ -54,5 +56,4 @@ requirements while working on the task:
 https://git-scm.com/docs
 https://guides.github.com/introduction/flow/
 
-The task should take 1-3 days. If you have any questions, do not hesitate to ask them in the
-Slack channel #js_task_1
+The task should take 1-3 days.

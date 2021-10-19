@@ -8,6 +8,9 @@ const deleteIcon = "./pictures/deleteIcon.png";
 const editIcon = "./pictures/editIcon.png";
 const archiveIcon = "./pictures/archiveIcon.png";
 const mainTableIcon = "./pictures/mainTableIcon.png";
+const ideaIcon = "./pictures/idea.png";
+const taskIcon = "./pictures/task.png";
+const thoughtIcon = "./pictures/thought.png";
 
 const CATEGORIES = ["Task", "Random Thought", "Idea"];
 const EDITABLE_FIELDS = ["name", "category", "content"];
@@ -15,11 +18,34 @@ let view = "main";
 
 let tableValues = [
   {
-    name: "Shopping List",
-    created: "Apr 20, 2021",
+    name: "Learn Java Script.",
+    created: "Apr 20, 2020",
+    category: "Idea",
+    content:
+      "If I learn JavaScript I will discover more opportunities in my life.",
+    dates: "",
+  },
+  {
+    name: "Shroud thoughts",
+    created: "May 08, 2021",
+    category: "Random Thought",
+    content: "Banana is big but the peel is much bigger",
+    dates: "",
+  },
+  {
+    name: "My elaborate plan of learning JavaScript",
+    created: "Jan 15, 2021",
     category: "Task",
-    content: "tomatoes, bread",
-    dates: "15.12.2012",
+    content:
+      "If I finally start learning JS today 15.01.2021, until my next birthday on 25.03.1989 I will be a great programmer",
+    dates: "15.01.2021, 25.03.1989.",
+  },
+  {
+    name: "Shopping List",
+    created: "Oct 20, 2021",
+    category: "Task",
+    content: "Cream, apples, potato, beer.",
+    dates: "",
   },
   {
     name: "New feature",
@@ -32,13 +58,74 @@ let tableValues = [
     name: "Old feature",
     created: "Feb 25, 2021",
     category: "Random Thought",
-    content: "Old feature 18.12.2021 better new twos 17.11.1019",
+    content: "Old feature better new twos.",
+    dates: "",
+  },
+  {
+    name: "I know a little about this life",
+    created: "Oct 31, 2021",
+    category: "Random Thought",
+    content:
+      "If life were predictable it would cease to be life, and be without flavor. ",
     dates: "",
   },
 ];
 
 let archivedValues = [];
 let statisticValues = {};
+
+appendButtons(headerControlButtons, "thead");
+appendEntries(tableValues);
+calculateStatistic();
+
+createEntryBtn.addEventListener("click", () => {
+  createNewEntry();
+  appendEntries(tableValues);
+  switchToMainView();
+});
+
+headerControlButtons.addEventListener("click", handleHeaderBtnClick);
+mainTableDataForm.addEventListener("click", calculateStatistic);
+mainTableDataForm.addEventListener("keypress", handleFormKeyPress);
+createEntryBtn.dataset.action = "edit";
+
+function handleFormKeyPress(e) {
+  if (e.key === "Enter") {
+    toggleEditMode(e.target.closest("tr"));
+    calculateStatistic();
+  }
+}
+
+function appendIcons(action = "for main table") {
+  [...mainTable.rows].forEach((tr, index) => {
+    const img = document.createElement("img");
+    img.className = "categories-icons";
+    if (action === "for main table") {
+      if (tableValues[index]?.category === "Task") img.src = taskIcon;
+      if (tableValues[index]?.category === "Random Thought")
+        img.src = thoughtIcon;
+      if (tableValues[index]?.category === "Idea") img.src = ideaIcon;
+    } else if (action === "for archive table") {
+      if (archivedValues[index]?.category === "Task") img.src = taskIcon;
+      if (archivedValues[index]?.category === "Random Thought")
+        img.src = thoughtIcon;
+      if (archivedValues[index]?.category === "Idea") img.src = ideaIcon;
+    }
+    tr.append(img);
+  });
+}
+
+function appendStatisticIcons() {
+  [...archiveTable.rows].forEach((tr) => {
+    const img = document.createElement("img");
+    img.className = "categories-icons";
+    const category = tr.querySelector("input").value;
+    if (category === "Task") img.src = taskIcon;
+    if (category === "Random Thought") img.src = thoughtIcon;
+    if (category === "Idea") img.src = ideaIcon;
+    tr.append(img);
+  });
+}
 
 function calculateStatistic(e) {
   //  "This try/catch structure is unnecessary here, I had used the try/catch structure according to the task
@@ -89,19 +176,8 @@ function appendStatisticEntries(statisticValues) {
     }
     archiveTable.append(newTableRow);
   }
+  appendStatisticIcons();
 }
-
-appendButtons(headerControlButtons, "thead");
-appendEntries(tableValues);
-calculateStatistic();
-
-createEntryBtn.addEventListener("click", () => {
-  createNewEntry();
-  appendEntries(tableValues);
-  switchToMainView();
-});
-headerControlButtons.addEventListener("click", handleHeaderBtnClick);
-mainTableDataForm.addEventListener("click", calculateStatistic);
 
 function createNewEntry() {
   const entryData = {};
@@ -142,6 +218,11 @@ function appendEntries(targetValues, action = "for main table") {
     newTableRow.append(actionsTd);
     mainTable.append(newTableRow);
   });
+  if (action === "for main table") {
+    appendIcons();
+  } else if (action === "for archive table") {
+    appendIcons("for archive table");
+  }
 }
 
 function createSelectElem(parentNode, cell, index, tableEntry) {
@@ -303,7 +384,7 @@ function handleTableChangeData(rowId) {
 }
 
 function extractDateInfo(fieldText) {
-  const result = fieldText.match(/\d{1,2}[.,/\\]\d{1,2}[.,/\\]\d{2,4}/g);
+  const result = fieldText?.match(/\d{1,2}[.,/\\]\d{1,2}[.,/\\]\d{2,4}/g);
   return result
     ? result.reduce((accumulator, value, index, array) => {
         const prefix = index === array.length - 1 ? "." : ", ";
